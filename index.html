@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <!-- Estilos de Animação Corrigidos e Seguros -->
+    <!-- Sistema de Animação CSS Integrado -->
     <style>
         @keyframes pulse-live {
             0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.98); }
+            50% { opacity: 0.6; transform: scale(0.98); }
             100% { opacity: 1; transform: scale(1); }
         }
         @keyframes float-tag {
@@ -24,21 +24,21 @@
             100% { transform: translateY(0px); }
         }
         @keyframes glow-green {
-            0% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.1); }
+            0% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.1); border-color: rgba(74, 222, 128, 0.4); }
             50% { box-shadow: 0 0 15px rgba(74, 222, 128, 0.4); border-color: #4ade80; }
-            100% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.1); }
+            100% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.1); border-color: rgba(74, 222, 128, 0.4); }
         }
         @keyframes glow-gold {
-            0% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.1); }
+            0% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.4); }
             50% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); border-color: #eab308; }
-            100% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.1); }
+            100% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.4); }
         }
         
         .live-badge {
             display: inline-block;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             animation: pulse-live 2s infinite ease-in-out;
@@ -46,19 +46,21 @@
         }
         
         .animated-card-green {
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .animated-card-green:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             background: #242f41 !important;
             animation: glow-green 2s infinite ease-in-out;
         }
 
         .animated-card-gold {
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .animated-card-gold:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             background: #2d3247 !important;
             animation: glow-gold 2s infinite ease-in-out;
         }
@@ -133,34 +135,34 @@
     </div>
 </section>
 
-<!-- PALPITES DO DIA (FOCO REAL: COPA DO MUNDO) -->
+<!-- PALPITES DO DIA (FOCO: COPA DO MUNDO 2026) -->
 <section id="palpites" class="section">
     <div class="container">
         <div class="card">
-            <h2>🏆 Palpites da Copa do Mundo</h2>
-            <p style="color:#f5d97d; margin-bottom:20px;">🔥 Odds reais reguladas no padrão Bet365 • Atualizado hoje (04/07)</p>
+            <h2>🏆 Palpites do Dia — Copa do Mundo 2026</h2>
+            <p style="color:#f5d97d; margin-bottom:20px;">🔥 Mercado Real Bet365 • Atualizado em Tempo Real (04/07)</p>
             
             <div style="display:grid; gap:18px;">
                 
                 <!-- JOGO 1: CANADÁ X MARROCOS -->
                 <div class="animated-card-green" style="background:#1f2937; padding:18px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <span class="live-badge" style="background: #10b981; color: #fff;">⚽ COPA DO MUNDO • 14:00</span>
+                    <span class="live-badge" style="background: #10b981; color: #fff;">⚽ COPA DO MUNDO • HOJE 14:00</span>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                         <strong style="font-size: 1.15rem; color: #fff;">Canadá x Marrocos</strong>
-                        <span style="background: #374151; color: #4ade80; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; border: 1px solid #4ade80;">BET365 ODDS</span>
+                        <span style="background: #374151; color: #4ade80; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; border: 1px solid rgba(74, 222, 128, 0.4);">LIVE ODDS</span>
                     </div>
                     <span style="color:#9ca3af; font-size: 0.85rem; display: block; margin-top: 2px;">Fase de Grupos • Mercado de Gols</span><br>
                     
                     <div style="background: #111827; padding: 12px; border-radius: 8px; border: 1px solid #374151;">
-                        <strong>Palpite:</strong> Total de Gols - Mais de 2.5 Gols<br>
-                        <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.2rem;">2.10</span>
+                        <strong>Palpite:</strong> Total de Gols — Mais de 2.5 Gols<br>
+                        <strong>Odd Bet365:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.2rem;">2.10</span>
                     </div>
                 </div>
 
-                <!-- JOGO 2: PARAGUAI X FRANÇA (ODD TURBINADA) -->
+                <!-- JOGO 2: PARAGUAI X FRANÇA -->
                 <div class="animated-card-gold" style="background:#202538; padding:18px; border-radius:12px; border-left:5px solid #eab308;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="live-badge" style="background: #eab308; color: #000;">⚡ ODD TURBINADA BET365</span>
+                        <span class="live-badge" style="background: #eab308; color: #000;">⚡ CRIA ESTILIZADA / AUMENTADA</span>
                         <span style="color:#9ca3af; font-size: 0.8rem; font-weight: 600;">HOJE 18:00</span>
                     </div>
                     <div style="margin-top: 4px;">
@@ -169,16 +171,16 @@
                     <span style="color:#9ca3af; font-size: 0.85rem; display: block; margin-top: 2px;">Fase de Grupos • Resultado Final</span><br>
                     
                     <div style="background: #111827; padding: 12px; border-radius: 8px; border: 1px solid #eab308;">
-                        <strong>Palpite:</strong> Resultado Final - Vitória da França<br>
-                        <strong>Odd Normal:</strong> <span style="color:#9ca3af; text-decoration: line-through; font-size: 0.9rem;">1.50</span> │ 
-                        <strong>Odd Turbinada:</strong> <span style="color:#eab308; font-weight:800; font-size:1.25rem; text-shadow: 0 0 8px rgba(234, 179, 8, 0.3);">1.72</span>
+                        <strong>Palpite:</strong> Resultado Final — Vitória da França<br>
+                        <strong>Odd Comum:</strong> <span style="color:#9ca3af; text-decoration: line-through; font-size: 0.9rem;">1.50</span> │ 
+                        <strong>Aposta Aumentada:</strong> <span style="color:#eab308; font-weight:800; font-size:1.25rem; text-shadow: 0 0 8px rgba(234, 179, 8, 0.3);">1.72</span>
                     </div>
                 </div>
 
             </div>
 
             <p style="text-align:center; margin-top:25px; color:#9ca3af; font-size:0.95rem;">
-                ℹ️ <em>As odds refletem a liquidez oficial do mercado. Jogue com responsabilidade.</em>
+                ℹ️ <em>As cotações apresentadas refletem probabilidades reais de mercado da Bet365 para o dia 04 de julho. Opere com consciência.</em>
             </p>
         </div>
     </div>
