@@ -50,8 +50,11 @@ function calcularHorarios() {
             ${horario9} 🌹🚀 <span style="color:#f5d97d; font-weight:500;"> → ${frase}</span>
         </div>
 
-        <div style="margin-top: 25px; padding: 15px; background:#1a1a1f; border-radius:12px;">
+        <div style="margin-top: 25px; padding: 18px; background:#1a1a1f; border-radius:12px;">
             <h4 style="margin-bottom:12px;">Qual horário deu certo hoje?</h4>
+            <div style="font-size:1.1rem; font-weight:600; color:#4ade80; margin-bottom:12px;" id="totalAcertos">
+                Total de acertos: 0
+            </div>
             <div id="enqueteHorarios" style="display:flex; flex-direction:column; gap:10px;">
                 <!-- Votos serão inseridos via JS -->
             </div>
@@ -61,23 +64,27 @@ function calcularHorarios() {
         <button id="copiarHorarios">Copiar Horários</button>
     `;
 
-    // Carrega e cria enquete
     criarEnquete([horario5, horario7, horario9]);
 }
 
-// Função da Enquete
+// Função da Enquete com Contador Total
 function criarEnquete(horarios) {
     const container = document.getElementById("enqueteHorarios");
+    const totalEl = document.getElementById("totalAcertos");
     if (!container) return;
+
+    let totalGeral = 0;
 
     let html = '';
 
     horarios.forEach(horario => {
         const votos = getVotos(horario);
+        totalGeral += votos;
+
         html += `
-            <div style="display:flex; align-items:center; justify-content:space-between; background:#25252b; padding:10px 14px; border-radius:10px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#25252b; padding:12px 16px; border-radius:10px;">
                 <span><strong>${horario}</strong></span>
-                <button onclick="votar('${horario}')" style="background:#10b981; color:white; border:none; padding:6px 14px; border-radius:8px; cursor:pointer;">
+                <button onclick="votar('${horario}')" style="background:#10b981; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600;">
                     👍 ${votos}
                 </button>
             </div>
@@ -85,6 +92,7 @@ function criarEnquete(horarios) {
     });
 
     container.innerHTML = html;
+    totalEl.textContent = `Total de acertos: ${totalGeral}`;
 }
 
 function getVotos(horario) {
@@ -97,23 +105,65 @@ function votar(horario) {
     localStorage.setItem('voto_' + horario, votos);
     
     // Atualiza a enquete
-    criarEnquete([
-        document.querySelectorAll('.resultado-item')[0].textContent.trim().split(' ')[0],
-        document.querySelectorAll('.resultado-item')[1].textContent.trim().split(' ')[0],
-        document.querySelectorAll('.resultado-item')[2].textContent.trim().split(' ')[0]
-    ]);
+    const horariosAtuais = Array.from(document.querySelectorAll('.resultado-item')).map(el => {
+        return el.textContent.trim().split(' ')[0];
+    });
+    
+    criarEnquete(horariosAtuais);
 }
 
-// ---------- RESTO DO CÓDIGO (Gestão, PIX, etc) ----------
+// ---------- RESTO DO CÓDIGO ----------
 const btnBanca = document.getElementById("btnBanca");
 if (btnBanca) btnBanca.addEventListener("click", calcularBanca);
 
-function calcularBanca() { /* ... seu código atual ... */ }
+function calcularBanca() {
+    const banca = parseFloat(document.getElementById("bancaValor").value);
+    const resultado = document.getElementById("resultadoBanca");
 
+    if (isNaN(banca) || banca <= 0) {
+        resultado.innerHTML = `<p style="color:red;">Informe um valor válido.</p>`;
+        return;
+    }
+
+    const metaDiaria = banca * 0.10;
+    const stopWin = metaDiaria;
+    const stopLoss = metaDiaria;
+
+    resultado.innerHTML = `
+        <h3>Resultado</h3>
+        <p><strong>Banca:</strong> R$ ${banca.toFixed(2)}</p>
+        <p><strong>Meta diária (10%):</strong> R$ ${metaDiaria.toFixed(2)}</p>
+        <p><strong>Stop Win:</strong> R$ ${stopWin.toFixed(2)}</p>
+        <p><strong>Stop Loss:</strong> R$ ${stopLoss.toFixed(2)}</p>
+        <hr>
+        <p>Trabalhe apenas com a meta diária. Após atingir o objetivo, encerre suas operações.</p>
+    `;
+}
+
+// PIX (com confetes)
 const btnPix = document.getElementById("copiarPix");
-if (btnPix) { /* ... seu código do PIX com confetes ... */ }
+if (btnPix) {
+    btnPix.addEventListener("click", function () {
+        const chave = document.getElementById("pixCode").value;
+        navigator.clipboard.writeText(chave).then(() => {
+            btnPix.innerHTML = "✅ Copiado com Sucesso!";
+            btnPix.style.background = "#10b981";
 
-// Scroll suave e ano automático permanecem iguais
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+
+            const audio = new Audio("https://www.soundjay.com/buttons/applause-1.mp3");
+            audio.volume = 0.4;
+            audio.play().catch(() => {});
+
+            setTimeout(() => {
+                btnPix.innerHTML = "COPIAR CHAVE PIX";
+                btnPix.style.background = "";
+            }, 3000);
+        });
+    });
+}
+
+// Scroll Suave + Ano
 document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", function (e) {
         e.preventDefault();
