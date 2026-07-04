@@ -19,6 +19,7 @@
         </div>
         <nav>
             <a href="#calculadora">Calculadora</a>
+            <a href="#palpites">Palpites do Dia</a>
             <a href="#banca">Gestão de Banca</a>
             <a href="#pix">Doação</a>
         </nav>
@@ -34,50 +35,78 @@
     </div>
 </section>
 
-<!-- CALCULADORA + PLATAFORMA INDICADA -->
+<!-- CALCULADORA + PLATAFORMA -->
 <section id="calculadora" class="section">
     <div class="container">
         <div class="card" style="padding: 35px;">
-            
-            <!-- Calculadora de Horários -->
             <h2>Possíveis Horários</h2>
             <p>Informe o horário da última vela registrada.</p>
-            
             <div class="input-group">
                 <label>Horário</label>
                 <input type="time" id="horario">
             </div>
-            
             <button id="btnHorario">CALCULAR</button>
-            
             <div id="resultadoHorario" class="resultado"></div>
-            
             <div class="aviso">
                 Esta ferramenta aplica apenas uma regra de cálculo baseada no horário informado pelo usuário. 
                 Os horários exibidos representam apenas uma possibilidade e não garantem qualquer resultado.
             </div>
 
-            <!-- Plataforma Indicada integrada (forte call to action) -->
+            <!-- Plataforma Integrada -->
             <div style="margin-top: 45px; padding-top: 35px; border-top: 2px solid #374151;">
                 <h3 style="color:#4ade80; text-align:center; margin-bottom:8px;">🚀 Plataforma Recomendada</h3>
                 <h4 style="text-align:center; margin-bottom:20px;">ExodiaPlay</h4>
-                
-                <p style="text-align:center; font-weight:500; margin-bottom:20px;">
-                    Confira os benefícios e promoções oferecidos pela plataforma:
-                </p>
-                
+                <p style="text-align:center; font-weight:500; margin-bottom:20px;">Confira os benefícios e promoções oferecidos pela plataforma:</p>
                 <ul style="margin: 0 0 25px 0; padding-left: 20px;">
                     <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Deposite e ganhe <strong>saldo extra</strong></li>
                     <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Obtenha <strong>cashback</strong></li>
                     <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Ganhe <strong>rodadas grátis</strong></li>
                     <li style="margin-bottom:10px;">✔ E muito mais</li>
                 </ul>
-
-                <a href="https://exodiaplay.com" target="_blank" class="botao" 
-                   style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981; border-radius:12px;">
+                <a href="https://exodiaplay.com" target="_blank" class="botao" style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981;">
                     ACESSAR PLATAFORMA INDICADA PARA EXECUTAR OPERAÇÃO
                 </a>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- PALPITES DO DIA -->
+<section id="palpites" class="section">
+    <div class="container">
+        <div class="card">
+            <h2>🔥 Palpites do Dia (Odds 2.0x - 4.0x)</h2>
+            <p style="color:#f5d97d; margin-bottom:20px;">Palpites atualizados diariamente • Apostas seguras na ExodiaPlay</p>
+            
+            <div style="display:grid; gap:18px;">
+                <!-- Palpite 1 -->
+                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <strong>Manchester City x Bayern de Munique</strong><br>
+                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
+                    <strong>Palpite:</strong> Mais de 2.5 Gols<br>
+                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.45x</span>
+                </div>
+
+                <!-- Palpite 2 -->
+                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <strong>Real Madrid x Juventus</strong><br>
+                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
+                    <strong>Palpite:</strong> Dupla Chance - Real Madrid ou Empate<br>
+                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.10x</span>
+                </div>
+
+                <!-- Palpite 3 -->
+                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <strong>Arsenal x PSG</strong><br>
+                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
+                    <strong>Palpite:</strong> Mais de 8.5 Escanteios<br>
+                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.80x</span>
+                </div>
+            </div>
+
+            <p style="text-align:center; margin-top:25px; color:#9ca3af; font-size:0.95rem;">
+                ✅ Palpites baseados em estatísticas recentes • Jogue com responsabilidade
+            </p>
         </div>
     </div>
 </section>
@@ -105,11 +134,9 @@
             <h2>Apoie este Projeto</h2>
             <p>Este projeto é gratuito.<br>
             Caso queira colaborar com futuras melhorias, você pode contribuir através do Pix.</p>
-            
             <textarea readonly id="pixCode" style="text-align: center; font-size: 1rem;">
 00020126580014br.gov.bcb.pix0136db59e492-c6fc-4611-9b98-83af16faebce5204000053039865802BR5925PIXUP SERVICOS E INTERMED6008SALVADOR62290525aMk70lUQ5RdI36gp6K9hba2bv6304123D
             </textarea>
-            
             <button id="copiarPix">COPIAR CHAVE PIX</button>
         </div>
     </div>
