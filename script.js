@@ -75,7 +75,6 @@ ${horario7} 🌹🚀 → ${frase}
 ${horario9} 🌹🚀 → ${frase}`;
 
         navigator.clipboard.writeText(texto);
-
         botaoCopiar.innerHTML = "✅ Copiado!";
         setTimeout(() => {
             botaoCopiar.innerHTML = "Copiar Horários";
@@ -85,12 +84,15 @@ ${horario9} 🌹🚀 → ${frase}`;
 
 // ---------- GESTÃO DE BANCA ----------
 const btnBanca = document.getElementById("btnBanca");
+
 if (btnBanca) {
     btnBanca.addEventListener("click", calcularBanca);
 }
+
 function calcularBanca() {
     const banca = parseFloat(document.getElementById("bancaValor").value);
     const resultado = document.getElementById("resultadoBanca");
+
     if (isNaN(banca) || banca <= 0) {
         resultado.innerHTML = `
             <p style="color:red;">
@@ -99,9 +101,11 @@ function calcularBanca() {
         `;
         return;
     }
+
     const metaDiaria = banca * 0.10;
     const stopWin = metaDiaria;
     const stopLoss = metaDiaria;
+
     resultado.innerHTML = `
         <h3>Resultado</h3>
         <p><strong>Banca:</strong> R$ ${banca.toFixed(2)}</p>
@@ -116,16 +120,36 @@ function calcularBanca() {
     `;
 }
 
-// ---------- PIX ----------
+// ---------- PIX COM EFEITO DE COMEMORAÇÃO ----------
 const btnPix = document.getElementById("copiarPix");
+
 if (btnPix) {
     btnPix.addEventListener("click", function () {
         const chave = document.getElementById("pixCode").value;
-        navigator.clipboard.writeText(chave);
-        btnPix.innerHTML = "✅ Pix Copiado";
-        setTimeout(function () {
-            btnPix.innerHTML = "COPIAR CHAVE PIX";
-        }, 2000);
+        
+        navigator.clipboard.writeText(chave).then(() => {
+            btnPix.innerHTML = "✅ Copiado com Sucesso!";
+            btnPix.style.background = "#10b981";
+            btnPix.style.color = "#fff";
+
+            // Confetes
+            confetti({
+                particleCount: 200,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            // Som de aplausos (pode ser trocado)
+            const audio = new Audio("https://www.soundjay.com/buttons/applause-1.mp3");
+            audio.volume = 0.4;
+            audio.play().catch(() => {});
+
+            setTimeout(() => {
+                btnPix.innerHTML = "COPIAR CHAVE PIX";
+                btnPix.style.background = "";
+                btnPix.style.color = "";
+            }, 3000);
+        });
     });
 }
 
