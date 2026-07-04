@@ -1,22 +1,128 @@
-<!-- PLATAFORMA -->
-<section id="plataforma" class="section">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Tools | Calculadora de Estratégias</title>
+    <meta name="description" content="Ferramentas para organização de estratégias, gestão de banca e recursos auxiliares.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<header>
     <div class="container">
-        <div class="card destaque">
-            <h2>Plataforma Indicada</h2>
-            <h3>ExodiaPlay</h3>
-            <p>Confira os benefícios e promoções oferecidos pela plataforma antes de utilizar seus serviços.</p>
-            <ul>
-                <li style="color:#4ade80; font-weight:600;">✔ Deposite e ganhe <strong>saldo extra</strong></li>
-                <li style="color:#4ade80; font-weight:600;">✔ Obtenha <strong>cashback</strong></li>
-                <li style="color:#4ade80; font-weight:600;">✔ Ganhe <strong>rodadas grátis</strong></li>
-                <li>✔ E muito mais</li>
-                <li>✔ Promoções disponíveis conforme campanhas vigentes.</li>
-                <li>✔ Consulte as condições para bônus e benefícios.</li>
-                <li>✔ Verifique no suporte as regras aplicáveis.</li>
-            </ul>
-            <a href="https://exodiaplay.com" target="_blank" class="botao">
-                ACESSAR PLATAFORMA INDICADA PARA EXECUTAR OPERAÇÃO
-            </a>
+        <div class="logo">
+            <h2>Aviator<span>Tools</span></h2>
+        </div>
+        <nav>
+            <a href="#calculadora">Calculadora</a>
+            <a href="#banca">Gestão de Banca</a>
+            <a href="#pix">Doação</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <span class="tag">Ferramenta Gratuita</span>
+        <h1>Calculadora de Estratégias<br>e Gestão de Banca</h1>
+        <p>Ferramentas desenvolvidas para auxiliar na organização das suas estratégias e gerenciamento diário da banca.</p>
+    </div>
+</section>
+
+<!-- CALCULADORA + PLATAFORMA INDICADA -->
+<section id="calculadora" class="section">
+    <div class="container">
+        <div class="card" style="padding: 35px;">
+            
+            <!-- Calculadora de Horários -->
+            <h2>Possíveis Horários</h2>
+            <p>Informe o horário da última vela registrada.</p>
+            
+            <div class="input-group">
+                <label>Horário</label>
+                <input type="time" id="horario">
+            </div>
+            
+            <button id="btnHorario">CALCULAR</button>
+            
+            <div id="resultadoHorario" class="resultado"></div>
+            
+            <div class="aviso">
+                Esta ferramenta aplica apenas uma regra de cálculo baseada no horário informado pelo usuário. 
+                Os horários exibidos representam apenas uma possibilidade e não garantem qualquer resultado.
+            </div>
+
+            <!-- Plataforma Indicada integrada (forte call to action) -->
+            <div style="margin-top: 45px; padding-top: 35px; border-top: 2px solid #374151;">
+                <h3 style="color:#4ade80; text-align:center; margin-bottom:8px;">🚀 Plataforma Recomendada</h3>
+                <h4 style="text-align:center; margin-bottom:20px;">ExodiaPlay</h4>
+                
+                <p style="text-align:center; font-weight:500; margin-bottom:20px;">
+                    Confira os benefícios e promoções oferecidos pela plataforma:
+                </p>
+                
+                <ul style="margin: 0 0 25px 0; padding-left: 20px;">
+                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Deposite e ganhe <strong>saldo extra</strong></li>
+                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Obtenha <strong>cashback</strong></li>
+                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Ganhe <strong>rodadas grátis</strong></li>
+                    <li style="margin-bottom:10px;">✔ E muito mais</li>
+                </ul>
+
+                <a href="https://exodiaplay.com" target="_blank" class="botao" 
+                   style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981; border-radius:12px;">
+                    ACESSAR PLATAFORMA INDICADA PARA EXECUTAR OPERAÇÃO
+                </a>
+            </div>
         </div>
     </div>
 </section>
+
+<!-- GESTÃO DE BANCA -->
+<section id="banca" class="section">
+    <div class="container">
+        <div class="card">
+            <h2>Gestão de Banca</h2>
+            <p>Informe o valor da sua banca.</p>
+            <div class="input-group">
+                <label>Valor da banca</label>
+                <input type="number" id="bancaValor" placeholder="100">
+            </div>
+            <button id="btnBanca">CALCULAR</button>
+            <div id="resultadoBanca" class="resultado"></div>
+        </div>
+    </div>
+</section>
+
+<!-- PIX -->
+<section id="pix" class="section">
+    <div class="container">
+        <div class="card">
+            <h2>Apoie este Projeto</h2>
+            <p>Este projeto é gratuito.<br>
+            Caso queira colaborar com futuras melhorias, você pode contribuir através do Pix.</p>
+            
+            <textarea readonly id="pixCode" style="text-align: center; font-size: 1rem;">
+00020126580014br.gov.bcb.pix0136db59e492-c6fc-4611-9b98-83af16faebce5204000053039865802BR5925PIXUP SERVICOS E INTERMED6008SALVADOR62290525aMk70lUQ5RdI36gp6K9hba2bv6304123D
+            </textarea>
+            
+            <button id="copiarPix">COPIAR CHAVE PIX</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <h3>Aviator Tools</h3>
+        <p>Versão 1.0</p>
+        <p>© 2026 Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
