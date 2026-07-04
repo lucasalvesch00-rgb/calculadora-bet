@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -270,14 +271,64 @@
             transform: translateY(-1px);
         }
 
-        /* Botão secundário em vermelho */
-        .btn-red {
-            background: linear-gradient(135deg, #ff0055, #cc0044);
-            color: #fff;
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            border-radius: 60px;
+            padding: 16px 20px;
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 999;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.15);
         }
 
-        .btn-red:hover {
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5);
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float i {
+            font-size: 1.8rem;
+        }
+
+        .whatsapp-float .wpp-text {
+            display: inline-block;
+        }
+
+        /* Botão WhatsApp Secundário (Futebol) */
+        .whatsapp-float.futebol {
+            bottom: 100px;
+            background: #128C7E;
+            box-shadow: 0 6px 30px rgba(18, 140, 126, 0.4);
+        }
+
+        .whatsapp-float.futebol:hover {
+            box-shadow: 0 8px 40px rgba(18, 140, 126, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .whatsapp-float {
+                padding: 14px 18px;
+                font-size: 0.9rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float.futebol {
+                bottom: 85px;
+            }
+            .whatsapp-float .wpp-text {
+                display: none;
+            }
         }
 
         /* ===== RESULTADO ===== */
@@ -510,6 +561,18 @@
     </div>
 </header>
 
+<!-- WhatsApp Flutuante - Aviator -->
+<a href="https://chat.whatsapp.com/ELRJtKcOOOyKfMcQHUBBYs?s=cl&p=a&ilr=2" target="_blank" class="whatsapp-float" id="whatsappAviator">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wpp-text">Grupo AVIATOR</span>
+</a>
+
+<!-- WhatsApp Flutuante - Futebol -->
+<a href="https://chat.whatsapp.com/HK3hcngvAo2JGaqUu7TQgA?s=cl&p=a&ilr=2" target="_blank" class="whatsapp-float futebol" id="whatsappFutebol">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wpp-text">Palpites Futebol</span>
+</a>
+
 <section class="hero">
     <div class="container">
         <span class="tag">Ferramenta Gratuita</span>
@@ -554,8 +617,8 @@
 <section id="palpites" class="section">
     <div class="container">
         <div class="card">
-            <h2>🔥 Palpites do Dia</h2>
-            <p style="color:#9ca3af; margin-bottom:20px;">Mercado de Futebol Bet365 • Atualizado em tempo real</p>
+            <h2>🔥 Palpites do Dia - Copa do Mundo</h2>
+            <p style="color:#9ca3af; margin-bottom:20px;">Mercado de Futebol Bet365 • Jogos de hoje • Eliminatórias</p>
             
             <div style="display:grid; gap:18px;">
                 <div class="animated-card">
@@ -567,19 +630,19 @@
                 </div>
 
                 <div class="animated-card">
-                    <span class="live-badge" style="background: #ff0055;">UEFA CHAMPIONS LEAGUE</span><br>
-                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Real Madrid x Manchester City</strong><br>
-                    <span style="color:#9ca3af; font-size: 0.9rem;">Amanhã - 16:00</span><br><br>
+                    <span class="live-badge" style="background: #ff0055;">COPA DO MUNDO / ELIMINATÓRIAS</span><br>
+                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Uruguai x Colômbia</strong><br>
+                    <span style="color:#9ca3af; font-size: 0.9rem;">Hoje - 19:00 (Horário de Brasília)</span><br><br>
                     <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Ambas as Equipes Marcam: Sim</span><br>
-                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.95</span>
+                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.87</span>
                 </div>
 
                 <div class="animated-card">
-                    <span class="live-badge" style="background: #fbbf24; color: #000;">PREMIER LEAGUE</span><br>
-                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Arsenal x Chelsea</strong><br>
-                    <span style="color:#9ca3af; font-size: 0.9rem;">Quarta-feira - 15:45</span><br><br>
-                    <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Escanteios - Mais de 9.5 Escanteios no Jogo</span><br>
-                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.83</span>
+                    <span class="live-badge" style="background: #fbbf24; color: #000;">COPA DO MUNDO / ELIMINATÓRIAS</span><br>
+                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Equador x Chile</strong><br>
+                    <span style="color:#9ca3af; font-size: 0.9rem;">Hoje - 17:30 (Horário de Brasília)</span><br><br>
+                    <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Mais de 1.5 Gols no 1º Tempo</span><br>
+                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.92</span>
                 </div>
             </div>
 
