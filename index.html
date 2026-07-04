@@ -8,60 +8,494 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    
     <style>
-        /* Animações e Estilos Vivos via CSS */
-        @keyframes pulse-live {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e27;
+            color: #e5e7eb;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background com imagem */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%2300d9ff;stop-opacity:0.05" /><stop offset="100%" style="stop-color:%23ff0055;stop-opacity:0.05" /></linearGradient></defs><rect width="1200" height="800" fill="%230a0e27"/><rect width="1200" height="800" fill="url(%23grad1)"/><line x1="0" y1="0" x2="300" y2="200" stroke="%2300d9ff" stroke-width="2" opacity="0.1"/><line x1="900" y1="0" x2="1200" y2="300" stroke="%23ff0055" stroke-width="2" opacity="0.1"/><circle cx="200" cy="150" r="80" fill="%2300d9ff" opacity="0.03"/><circle cx="1000" cy="650" r="100" fill="%23ff0055" opacity="0.03"/></svg>');
+            background-attachment: fixed;
+            background-repeat: repeat;
+            background-size: cover;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 217, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d9ff, #ff0055);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00d9ff;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(255, 0, 85, 0.05));
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(255, 0, 85, 0.2));
+            color: #00d9ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            margin-bottom: 20px;
+            animation: float 3s infinite ease-in-out;
+        }
+
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.5); }
-            100% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.2); }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d9ff, #ff0055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
         }
-        
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== SEÇÕES ===== */
+        .section {
+            padding: 60px 20px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 217, 255, 0.4);
+            box-shadow: 0 12px 48px rgba(0, 217, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #e5e7eb;
+        }
+
+        .card p {
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+
+        /* ===== INPUT GROUPS ===== */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e5e7eb;
+            font-size: 0.95rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+            color: #e5e7eb;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .input-group input::placeholder {
+            color: #6b7280;
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn-live,
+        .botao {
+            background: linear-gradient(135deg, #00d9ff, #00b8cc);
+            color: #0a0e27;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-live:hover,
+        .botao:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-live:active,
+        .botao:active {
+            transform: translateY(-1px);
+        }
+
+        /* Botão secundário em vermelho */
+        .btn-red {
+            background: linear-gradient(135deg, #ff0055, #cc0044);
+            color: #fff;
+        }
+
+        .btn-red:hover {
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5);
+        }
+
+        /* ===== RESULTADO ===== */
+        .resultado {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid #00d9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+
+        .resultado h3 {
+            color: #00d9ff;
+            margin-bottom: 15px;
+        }
+
+        .resultado p {
+            margin-bottom: 10px;
+            color: #e5e7eb;
+        }
+
+        .resultado-item {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid #00d9ff;
+        }
+
+        /* ===== AVISO ===== */
+        .aviso {
+            background: rgba(217, 119, 6, 0.1);
+            border-left: 4px solid #d97706;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #fcd34d;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CARDS ANIMADOS ===== */
+        .animated-card {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 5px solid #00d9ff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animated-card:hover {
+            transform: translateY(-5px);
+            border-left-color: #ff0055;
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.2);
+        }
+
         .live-badge {
-            background: #ef4444;
+            background: #ff0055;
             color: white;
-            padding: 4px 8px;
+            padding: 4px 12px;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: bold;
-            animation: pulse-live 1.8s infinite ease-in-out;
             display: inline-block;
             margin-bottom: 8px;
+            animation: pulse-live 1.8s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
         }
-        
-        .animated-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.98); }
         }
-        .animated-card:hover {
-            transform: translateY(-5px);
-            border-left-color: #3b82f6 !important;
-            background: #253346 !important;
-            animation: glow 2s infinite ease-in-out;
+
+        /* ===== ENQUETE ===== */
+        .enquete-container {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(255, 0, 85, 0.1));
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
         }
-        
-        .btn-live {
-            transition: all 0.2s ease;
+
+        .enquete-container h4 {
+            color: #00d9ff;
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
         }
-        .btn-live:hover {
-            filter: brightness(1.2);
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+
+        .enquete-total {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #00d9ff;
+            text-align: center;
+            margin-bottom: 16px;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        .enquete-horarios {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .enquete-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(25, 25, 43, 0.8);
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .enquete-item:hover {
+            border-color: rgba(0, 217, 255, 0.5);
+            background: rgba(25, 25, 43, 0.95);
+        }
+
+        .enquete-item strong {
+            color: #00d9ff;
+            font-size: 1.05rem;
+        }
+
+        .enquete-btn {
+            background: linear-gradient(135deg, #00d9ff, #00b8cc);
+            color: #0a0e27;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .enquete-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 2px solid rgba(0, 217, 255, 0.2);
+            padding: 40px 20px;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        footer h3 {
+            color: #00d9ff;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav {
+                gap: 15px;
+                font-size: 0.85rem;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .btn-live,
+            .botao {
+                width: 100%;
+                padding: 12px 20px;
+            }
         }
     </style>
 </head>
 <body>
+
 <header>
     <div class="container">
         <div class="logo">
@@ -78,7 +512,7 @@
 
 <section class="hero">
     <div class="container">
-        <span class="tag" style="animation: float 3s infinite ease-in-out;">Ferramenta Gratuita</span>
+        <span class="tag">Ferramenta Gratuita</span>
         <h1>Calculadora de Estratégias<br>e Gestão de Banca</h1>
         <p>Ferramentas desenvolvidas para auxiliar na organização das suas estratégias e gerenciamento diário da banca.</p>
     </div>
@@ -86,32 +520,31 @@
 
 <section id="calculadora" class="section">
     <div class="container">
-        <div class="card" style="padding: 35px;">
+        <div class="card">
             <h2>Possíveis Horários</h2>
             <p>Informe o horário da última vela registrada.</p>
             <div class="input-group">
                 <label>Horário</label>
                 <input type="time" id="horario">
             </div>
-            <button id="btnHorario" class="btn-live">CALCULAR</button>
+            <button class="btn-live" id="btnHorario">CALCULAR</button>
             <div id="resultadoHorario" class="resultado"></div>
             <div class="aviso">
-                Esta ferramenta aplica apenas uma regra de cálculo baseada no horário informado pelo usuário. 
-                Os horários exibidos representam apenas uma possibilidade e não garantem qualquer resultado.
+                ⚠️ Esta ferramenta aplica apenas uma regra de cálculo baseada no horário informado pelo usuário. Os horários exibidos representam apenas uma possibilidade e não garantem qualquer resultado.
             </div>
 
-            <div style="margin-top: 45px; padding-top: 35px; border-top: 2px solid #374151;">
-                <h3 style="color:#4ade80; text-align:center; margin-bottom:8px;">🚀 Plataforma Recomendada</h3>
+            <div style="margin-top: 45px; padding-top: 35px; border-top: 1px solid rgba(0, 217, 255, 0.2);">
+                <h3 style="text-align:center; margin-bottom:8px;">🚀 Plataforma Recomendada</h3>
                 <h4 style="text-align:center; margin-bottom:20px;">ExodiaPlay</h4>
                 <p style="text-align:center; font-weight:500; margin-bottom:20px;">Confira os benefícios e promoções oferecidos pela plataforma:</p>
-                <ul style="margin: 0 0 25px 0; padding-left: 20px;">
-                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Deposite e ganhe <strong>saldo extra</strong></li>
-                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Obtenha <strong>cashback</strong></li>
-                    <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Ganhe <strong>rodadas grátis</strong></li>
+                <ul style="margin: 0 0 25px 0; padding-left: 20px; color: #9ca3af;">
+                    <li style="color:#00d9ff; font-weight:600; margin-bottom:10px;">✔ Deposite e ganhe <strong>saldo extra</strong></li>
+                    <li style="color:#00d9ff; font-weight:600; margin-bottom:10px;">✔ Obtenha <strong>cashback</strong></li>
+                    <li style="color:#00d9ff; font-weight:600; margin-bottom:10px;">✔ Ganhe <strong>rodadas grátis</strong></li>
                     <li style="margin-bottom:10px;">✔ E muito mais</li>
                 </ul>
-                <a href="https://exodiaplay.com" target="_blank" class="botao btn-live" style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981; text-decoration: none; border-radius: 8px;">
-                    ACESSAR PLATAFORMA INDICADA PARA EXECUTAR OPERAÇÃO
+                <a href="https://exodiaplay.com" target="_blank" class="botao" style="display:block; text-align:center; width: 100%;">
+                    ACESSAR PLATAFORMA INDICADA
                 </a>
             </div>
         </div>
@@ -121,32 +554,32 @@
 <section id="palpites" class="section">
     <div class="container">
         <div class="card">
-            <h2>🔥 Palpites do Dia (Mercado de Futebol Bet365)</h2>
-            <p style="color:#f5d97d; margin-bottom:20px;">Atualizado em tempo real • Odds extraídas de padrões regulados Bet365</p>
+            <h2>🔥 Palpites do Dia</h2>
+            <p style="color:#9ca3af; margin-bottom:20px;">Mercado de Futebol Bet365 • Atualizado em tempo real</p>
             
             <div style="display:grid; gap:18px;">
-                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                <div class="animated-card">
                     <span class="live-badge">COPA DO MUNDO / ELIMINATÓRIAS</span><br>
-                    <strong>Brasil x Argentina</strong><br>
-                    <span style="color:#9ca3af;">Hoje - 21:45 (Horário de Brasília)</span><br><br>
-                    <strong>Palpite:</strong> Total de Gols - Mais de 2.5 Gols<br>
-                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">2.15</span>
+                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Brasil x Argentina</strong><br>
+                    <span style="color:#9ca3af; font-size: 0.9rem;">Hoje - 21:45 (Horário de Brasília)</span><br><br>
+                    <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Total de Gols - Mais de 2.5 Gols</span><br>
+                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">2.15</span>
                 </div>
 
-                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <span class="live-badge" style="background: #3b82f6;">UEFA CHAMPIONS LEAGUE</span><br>
-                    <strong>Real Madrid x Manchester City</strong><br>
-                    <span style="color:#9ca3af;">Amanhã - 16:00</span><br><br>
-                    <strong>Palpite:</strong> Ambas as Equipes Marcam: Sim<br>
-                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">1.95</span>
+                <div class="animated-card">
+                    <span class="live-badge" style="background: #ff0055;">UEFA CHAMPIONS LEAGUE</span><br>
+                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Real Madrid x Manchester City</strong><br>
+                    <span style="color:#9ca3af; font-size: 0.9rem;">Amanhã - 16:00</span><br><br>
+                    <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Ambas as Equipes Marcam: Sim</span><br>
+                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.95</span>
                 </div>
 
-                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <span class="live-badge" style="background: #eab308; color: #000;">PREMIER LEAGUE</span><br>
-                    <strong>Arsenal x Chelsea</strong><br>
-                    <span style="color:#9ca3af;">Quarta-feira - 15:45</span><br><br>
-                    <strong>Palpite:</strong> Escanteios - Mais de 9.5 Escanteios no Jogo<br>
-                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">1.83</span>
+                <div class="animated-card">
+                    <span class="live-badge" style="background: #fbbf24; color: #000;">PREMIER LEAGUE</span><br>
+                    <strong style="color: #e5e7eb; font-size: 1.1rem;">Arsenal x Chelsea</strong><br>
+                    <span style="color:#9ca3af; font-size: 0.9rem;">Quarta-feira - 15:45</span><br><br>
+                    <strong style="color: #e5e7eb;">Palpite:</strong> <span style="color: #9ca3af;">Escanteios - Mais de 9.5 Escanteios no Jogo</span><br>
+                    <strong style="color: #e5e7eb;">Odd Real:</strong> <span style="color:#00d9ff; font-weight:700; font-size:1.2rem;">1.83</span>
                 </div>
             </div>
 
@@ -161,12 +594,12 @@
     <div class="container">
         <div class="card">
             <h2>Gestão de Banca</h2>
-            <p>Informe o valor da sua banca.</p>
+            <p>Informe o valor da sua banca para calcular as metas e limites de operação.</p>
             <div class="input-group">
-                <label>Valor da banca</label>
-                <input type="number" id="bancaValor" placeholder="100">
+                <label>Valor da banca (R$)</label>
+                <input type="number" id="bancaValor" placeholder="100" min="0" step="0.01">
             </div>
-            <button id="btnBanca" class="btn-live">CALCULAR</button>
+            <button class="btn-live" id="btnBanca">CALCULAR</button>
             <div id="resultadoBanca" class="resultado"></div>
         </div>
     </div>
@@ -176,12 +609,13 @@
     <div class="container">
         <div class="card">
             <h2>Apoie este Projeto</h2>
-            <p>Este projeto é gratuito.<br>
+            <p>Este projeto é gratuito e desenvolvido com dedicação.<br>
             Caso queira colaborar com futuras melhorias, você pode contribuir através do Pix.</p>
-            <textarea readonly id="pixCode" style="text-align: center; font-size: 1rem;">
-00020126580014br.gov.bcb.pix0136db59e492-c6fc-4611-9b98-83af16faebce5204000053039865802BR5925PIXUP SERVICOS E INTERMED6008SALVADOR62290525aMk70lUQ5RdI36gp6K9hba2bv6304123D
-            </textarea>
-            <button id="copiarPix" class="btn-live">COPIAR CHAVE PIX</button>
+            <div class="input-group">
+                <label>Chave PIX (QR Code)</label>
+                <textarea readonly id="pixCode" style="text-align: center; font-size: 0.9rem; height: 80px;">00020126580014br.gov.bcb.pix0136db59e492-c6fc-4611-9b98-83af16faebce5204000053039865802BR5925PIXUP SERVICOS E INTERMED6008SALVADOR62290525aMk70lUQ5RdI36gp6K9hba2bv6304123D</textarea>
+            </div>
+            <button class="btn-live" id="copiarPix">COPIAR CHAVE PIX</button>
         </div>
     </div>
 </section>
@@ -189,11 +623,185 @@
 <footer>
     <div class="container">
         <h3>Aviator Tools</h3>
-        <p>Versão 1.0</p>
+        <p>Versão 2.0 - Redesigned</p>
         <p>© 2026 Todos os direitos reservados.</p>
     </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+    // ======================================================
+    // AVIATOR TOOLS - VERSÃO 2.0
+    // ======================================================
+
+    // ---------- CALCULADORA DE HORÁRIOS ----------
+    const btnHorario = document.getElementById("btnHorario");
+    if (btnHorario) {
+        btnHorario.addEventListener("click", calcularHorarios);
+    }
+
+    function calcularHorarios() {
+        const campoHorario = document.getElementById("horario");
+        const resultado = document.getElementById("resultadoHorario");
+
+        if (!campoHorario.value) {
+            resultado.innerHTML = `<p style="color:#ff6b6b;">Informe um horário válido.</p>`;
+            return;
+        }
+
+        const partes = campoHorario.value.split(":");
+        let horas = parseInt(partes[0]);
+        let minutos = parseInt(partes[1]);
+
+        function adicionarMinutos(h, m, adicionar) {
+            let total = h * 60 + m + adicionar;
+            total = total % (24 * 60);
+            let novaHora = Math.floor(total / 60);
+            let novoMinuto = total % 60;
+            return String(novaHora).padStart(2, "0") + ":" + String(novoMinuto).padStart(2, "0");
+        }
+
+        const horario5 = adicionarMinutos(horas, minutos, 5);
+        const horario7 = adicionarMinutos(horas, minutos, 7);
+        const horario9 = adicionarMinutos(horas, minutos, 9);
+
+        const frase = "Pegue 3x na proteção e 5x pra garantir o lucro.";
+
+        resultado.innerHTML = `
+            <h3>Possíveis horários para operar</h3>
+            
+            <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
+                <strong style="color: #00d9ff;">${horario5}</strong> 🌹🚀 <span style="color:#fbbf24; font-weight:500;"> → ${frase}</span>
+            </div>
+            <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
+                <strong style="color: #00d9ff;">${horario7}</strong> 🌹🚀 <span style="color:#fbbf24; font-weight:500;"> → ${frase}</span>
+            </div>
+            <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
+                <strong style="color: #00d9ff;">${horario9}</strong> 🌹🚀 <span style="color:#fbbf24; font-weight:500;"> → ${frase}</span>
+            </div>
+
+            <div class="enquete-container">
+                <h4>👍 Qual horário deu certo hoje?</h4>
+                <div class="enquete-total" id="totalAcertos">Total de acertos: 0</div>
+                <div class="enquete-horarios" id="enqueteHorarios"></div>
+            </div>
+
+            <br>
+            <button class="btn-live" id="copiarHorarios" style="width: 100%;">📋 Copiar Horários</button>
+        `;
+
+        criarEnquete([horario5, horario7, horario9]);
+
+        // Copiar horários
+        document.getElementById("copiarHorarios").addEventListener("click", function() {
+            const texto = `${horario5}\n${horario7}\n${horario9}`;
+            navigator.clipboard.writeText(texto).then(() => {
+                alert("Horários copiados com sucesso!");
+            });
+        });
+    }
+
+    // Função da Enquete
+    function criarEnquete(horarios) {
+        const container = document.getElementById("enqueteHorarios");
+        const totalEl = document.getElementById("totalAcertos");
+        if (!container) return;
+
+        let totalGeral = 0;
+        let html = '';
+
+        horarios.forEach(horario => {
+            const votos = getVotos(horario);
+            totalGeral += votos;
+
+            html += `
+                <div class="enquete-item">
+                    <span><strong>${horario}</strong></span>
+                    <button class="enquete-btn" onclick="votar('${horario}')">
+                        👍 ${votos}
+                    </button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+        totalEl.textContent = `Total de acertos: ${totalGeral}`;
+    }
+
+    function getVotos(horario) {
+        return parseInt(localStorage.getItem('voto_' + horario)) || 0;
+    }
+
+    function votar(horario) {
+        let votos = getVotos(horario);
+        votos++;
+        localStorage.setItem('voto_' + horario, votos);
+        
+        const horariosAtuais = Array.from(document.querySelectorAll('.resultado-item')).slice(0, 3).map(el => {
+            const match = el.textContent.match(/(\d{2}:\d{2})/);
+            return match ? match[0] : null;
+        }).filter(h => h !== null);
+        
+        if (horariosAtuais.length > 0) {
+            criarEnquete(horariosAtuais);
+        }
+    }
+
+    // ---------- GESTÃO DE BANCA ----------
+    const btnBanca = document.getElementById("btnBanca");
+    if (btnBanca) {
+        btnBanca.addEventListener("click", calcularBanca);
+    }
+
+    function calcularBanca() {
+        const banca = parseFloat(document.getElementById("bancaValor").value);
+        const resultado = document.getElementById("resultadoBanca");
+
+        if (isNaN(banca) || banca <= 0) {
+            resultado.innerHTML = `<p style="color:#ff6b6b;">Informe um valor válido.</p>`;
+            return;
+        }
+
+        const metaDiaria = banca * 0.10;
+        const stopWin = metaDiaria;
+        const stopLoss = metaDiaria;
+
+        resultado.innerHTML = `
+            <h3>Resultado da Análise de Banca</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #00d9ff;">
+                    <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 5px;">Banca Total</p>
+                    <p style="color: #00d9ff; font-size: 1.4rem; font-weight: 700;">R$ ${banca.toFixed(2)}</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #00d9ff;">
+                    <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 5px;">Meta Diária (10%)</p>
+                    <p style="color: #00d9ff; font-size: 1.4rem; font-weight: 700;">R$ ${metaDiaria.toFixed(2)}</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #00d9ff;">
+                    <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 5px;">Stop Win</p>
+                    <p style="color: #00d9ff; font-size: 1.4rem; font-weight: 700;">R$ ${stopWin.toFixed(2)}</p>
+                </div>
+                <div style="background: rgba(255, 0, 85, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #ff0055;">
+                    <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 5px;">Stop Loss</p>
+                    <p style="color: #ff0055; font-size: 1.4rem; font-weight: 700;">-R$ ${stopLoss.toFixed(2)}</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: #9ca3af; font-size: 0.95rem; text-align: center;">
+                <strong>Disciplina, estratégia e controle.</strong> Esses são os 3 pilares do lucro consistente.
+            </p>
+        `;
+    }
+
+    // ---------- COPIAR PIX ----------
+    const copiarPix = document.getElementById("copiarPix");
+    if (copiarPix) {
+        copiarPix.addEventListener("click", function() {
+            const pixCode = document.getElementById("pixCode");
+            pixCode.select();
+            document.execCommand("copy");
+            alert("Chave PIX copiada com sucesso! Obrigado pelo apoio! 🙏");
+        });
+    }
+</script>
+
 </body>
 </html>
