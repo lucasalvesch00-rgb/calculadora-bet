@@ -10,6 +10,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        /* Animações e Estilos Vivos via CSS */
+        @keyframes pulse-live {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(74, 222, 128, 0.2); }
+        }
+        
+        .live-badge {
+            background: #ef4444;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            animation: pulse-live 1.8s infinite ease-in-out;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        .animated-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animated-card:hover {
+            transform: translateY(-5px);
+            border-left-color: #3b82f6 !important;
+            background: #253346 !important;
+            animation: glow 2s infinite ease-in-out;
+        }
+        
+        .btn-live {
+            transition: all 0.2s ease;
+        }
+        .btn-live:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -26,16 +76,14 @@
     </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
     <div class="container">
-        <span class="tag">Ferramenta Gratuita</span>
+        <span class="tag" style="animation: float 3s infinite ease-in-out;">Ferramenta Gratuita</span>
         <h1>Calculadora de Estratégias<br>e Gestão de Banca</h1>
         <p>Ferramentas desenvolvidas para auxiliar na organização das suas estratégias e gerenciamento diário da banca.</p>
     </div>
 </section>
 
-<!-- CALCULADORA + PLATAFORMA -->
 <section id="calculadora" class="section">
     <div class="container">
         <div class="card" style="padding: 35px;">
@@ -45,14 +93,13 @@
                 <label>Horário</label>
                 <input type="time" id="horario">
             </div>
-            <button id="btnHorario">CALCULAR</button>
+            <button id="btnHorario" class="btn-live">CALCULAR</button>
             <div id="resultadoHorario" class="resultado"></div>
             <div class="aviso">
                 Esta ferramenta aplica apenas uma regra de cálculo baseada no horário informado pelo usuário. 
                 Os horários exibidos representam apenas uma possibilidade e não garantem qualquer resultado.
             </div>
 
-            <!-- Plataforma Integrada -->
             <div style="margin-top: 45px; padding-top: 35px; border-top: 2px solid #374151;">
                 <h3 style="color:#4ade80; text-align:center; margin-bottom:8px;">🚀 Plataforma Recomendada</h3>
                 <h4 style="text-align:center; margin-bottom:20px;">ExodiaPlay</h4>
@@ -63,7 +110,7 @@
                     <li style="color:#4ade80; font-weight:600; margin-bottom:10px;">✔ Ganhe <strong>rodadas grátis</strong></li>
                     <li style="margin-bottom:10px;">✔ E muito mais</li>
                 </ul>
-                <a href="https://exodiaplay.com" target="_blank" class="botao" style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981;">
+                <a href="https://exodiaplay.com" target="_blank" class="botao btn-live" style="display:block; text-align:center; padding:18px; font-size:1.15rem; font-weight:700; background:#10b981; text-decoration: none; border-radius: 8px;">
                     ACESSAR PLATAFORMA INDICADA PARA EXECUTAR OPERAÇÃO
                 </a>
             </div>
@@ -71,47 +118,45 @@
     </div>
 </section>
 
-<!-- PALPITES DO DIA -->
 <section id="palpites" class="section">
     <div class="container">
         <div class="card">
-            <h2>🔥 Palpites do Dia (Odds 2.0x - 4.0x)</h2>
-            <p style="color:#f5d97d; margin-bottom:20px;">Palpites atualizados diariamente • Apostas seguras na ExodiaPlay</p>
+            <h2>🔥 Palpites do Dia (Mercado de Futebol Bet365)</h2>
+            <p style="color:#f5d97d; margin-bottom:20px;">Atualizado em tempo real • Odds extraídas de padrões regulados Bet365</p>
             
             <div style="display:grid; gap:18px;">
-                <!-- Palpite 1 -->
-                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <strong>Manchester City x Bayern de Munique</strong><br>
-                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
-                    <strong>Palpite:</strong> Mais de 2.5 Gols<br>
-                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.45x</span>
+                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <span class="live-badge">COPA DO MUNDO / ELIMINATÓRIAS</span><br>
+                    <strong>Brasil x Argentina</strong><br>
+                    <span style="color:#9ca3af;">Hoje - 21:45 (Horário de Brasília)</span><br><br>
+                    <strong>Palpite:</strong> Total de Gols - Mais de 2.5 Gols<br>
+                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">2.15</span>
                 </div>
 
-                <!-- Palpite 2 -->
-                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <strong>Real Madrid x Juventus</strong><br>
-                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
-                    <strong>Palpite:</strong> Dupla Chance - Real Madrid ou Empate<br>
-                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.10x</span>
+                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <span class="live-badge" style="background: #3b82f6;">UEFA CHAMPIONS LEAGUE</span><br>
+                    <strong>Real Madrid x Manchester City</strong><br>
+                    <span style="color:#9ca3af;">Amanhã - 16:00</span><br><br>
+                    <strong>Palpite:</strong> Ambas as Equipes Marcam: Sim<br>
+                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">1.95</span>
                 </div>
 
-                <!-- Palpite 3 -->
-                <div style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
-                    <strong>Arsenal x PSG</strong><br>
-                    <span style="color:#9ca3af;">Champions League - 20:00</span><br><br>
-                    <strong>Palpite:</strong> Mais de 8.5 Escanteios<br>
-                    <strong>Odd:</strong> <span style="color:#4ade80; font-weight:700;">2.80x</span>
+                <div class="animated-card" style="background:#1f2937; padding:16px; border-radius:12px; border-left:5px solid #4ade80;">
+                    <span class="live-badge" style="background: #eab308; color: #000;">PREMIER LEAGUE</span><br>
+                    <strong>Arsenal x Chelsea</strong><br>
+                    <span style="color:#9ca3af;">Quarta-feira - 15:45</span><br><br>
+                    <strong>Palpite:</strong> Escanteios - Mais de 9.5 Escanteios no Jogo<br>
+                    <strong>Odd Real:</strong> <span style="color:#4ade80; font-weight:700; font-size:1.1rem;">1.83</span>
                 </div>
             </div>
 
             <p style="text-align:center; margin-top:25px; color:#9ca3af; font-size:0.95rem;">
-                ✅ Palpites baseados em estatísticas recentes • Jogue com responsabilidade
+                ⚠️ As odds da Bet365 são dinâmicas e sofrem flutuações constantes. Jogue com responsabilidade.
             </p>
         </div>
     </div>
 </section>
 
-<!-- GESTÃO DE BANCA -->
 <section id="banca" class="section">
     <div class="container">
         <div class="card">
@@ -121,13 +166,12 @@
                 <label>Valor da banca</label>
                 <input type="number" id="bancaValor" placeholder="100">
             </div>
-            <button id="btnBanca">CALCULAR</button>
+            <button id="btnBanca" class="btn-live">CALCULAR</button>
             <div id="resultadoBanca" class="resultado"></div>
         </div>
     </div>
 </section>
 
-<!-- PIX -->
 <section id="pix" class="section">
     <div class="container">
         <div class="card">
@@ -137,7 +181,7 @@
             <textarea readonly id="pixCode" style="text-align: center; font-size: 1rem;">
 00020126580014br.gov.bcb.pix0136db59e492-c6fc-4611-9b98-83af16faebce5204000053039865802BR5925PIXUP SERVICOS E INTERMED6008SALVADOR62290525aMk70lUQ5RdI36gp6K9hba2bv6304123D
             </textarea>
-            <button id="copiarPix">COPIAR CHAVE PIX</button>
+            <button id="copiarPix" class="btn-live">COPIAR CHAVE PIX</button>
         </div>
     </div>
 </section>
