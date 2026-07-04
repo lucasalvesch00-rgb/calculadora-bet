@@ -40,23 +40,24 @@ function calcularHorarios() {
     resultado.innerHTML = `
         <h3>Possíveis horários</h3>
         
-        <div class="resultado-item" style="margin: 12px 0; font-size: 1.08rem;">
+        <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
             ${horario5} 🌹🚀 <span style="color:#f5d97d; font-weight:500;"> → ${frase}</span>
         </div>
-        <div class="resultado-item" style="margin: 12px 0; font-size: 1.08rem;">
+        <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
             ${horario7} 🌹🚀 <span style="color:#f5d97d; font-weight:500;"> → ${frase}</span>
         </div>
-        <div class="resultado-item" style="margin: 12px 0; font-size: 1.08rem;">
+        <div class="resultado-item" style="margin: 12px 0; font-size: 1.1rem;">
             ${horario9} 🌹🚀 <span style="color:#f5d97d; font-weight:500;"> → ${frase}</span>
         </div>
 
-        <div style="margin-top: 25px; padding: 18px; background:#1a1a1f; border-radius:12px;">
-            <h4 style="margin-bottom:12px;">Qual horário deu certo hoje?</h4>
-            <div style="font-size:1.1rem; font-weight:600; color:#4ade80; margin-bottom:12px;" id="totalAcertos">
+        <!-- Enquete mais próxima e chamativa -->
+        <div style="margin-top: 20px; padding: 20px; background:linear-gradient(135deg, #1f2937, #111827); border-radius:16px; border:2px solid #4ade80;">
+            <h4 style="margin-bottom:12px; color:#4ade80; text-align:center;">👍 Qual horário deu certo hoje?</h4>
+            <div style="font-size:1.15rem; font-weight:700; color:#4ade80; text-align:center; margin-bottom:16px;" id="totalAcertos">
                 Total de acertos: 0
             </div>
-            <div id="enqueteHorarios" style="display:flex; flex-direction:column; gap:10px;">
-                <!-- Votos serão inseridos via JS -->
+            <div id="enqueteHorarios" style="display:flex; flex-direction:column; gap:12px;">
+                <!-- preenchido pelo JS -->
             </div>
         </div>
 
@@ -67,14 +68,13 @@ function calcularHorarios() {
     criarEnquete([horario5, horario7, horario9]);
 }
 
-// Função da Enquete com Contador Total
+// Função da Enquete
 function criarEnquete(horarios) {
     const container = document.getElementById("enqueteHorarios");
     const totalEl = document.getElementById("totalAcertos");
     if (!container) return;
 
     let totalGeral = 0;
-
     let html = '';
 
     horarios.forEach(horario => {
@@ -84,7 +84,7 @@ function criarEnquete(horarios) {
         html += `
             <div style="display:flex; align-items:center; justify-content:space-between; background:#25252b; padding:12px 16px; border-radius:10px;">
                 <span><strong>${horario}</strong></span>
-                <button onclick="votar('${horario}')" style="background:#10b981; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600;">
+                <button onclick="votar('${horario}')" style="background:#10b981; color:white; border:none; padding:8px 18px; border-radius:8px; cursor:pointer; font-weight:600; font-size:1.05rem;">
                     👍 ${votos}
                 </button>
             </div>
@@ -104,17 +104,18 @@ function votar(horario) {
     votos++;
     localStorage.setItem('voto_' + horario, votos);
     
-    // Atualiza a enquete
-    const horariosAtuais = Array.from(document.querySelectorAll('.resultado-item')).map(el => {
-        return el.textContent.trim().split(' ')[0];
-    });
+    const horariosAtuais = Array.from(document.querySelectorAll('.resultado-item')).map(el => 
+        el.textContent.trim().split(' ')[0]
+    );
     
     criarEnquete(horariosAtuais);
 }
 
-// ---------- RESTO DO CÓDIGO ----------
+// ---------- GESTÃO DE BANCA ----------
 const btnBanca = document.getElementById("btnBanca");
-if (btnBanca) btnBanca.addEventListener("click", calcularBanca);
+if (btnBanca) {
+    btnBanca.addEventListener("click", calcularBanca);
+}
 
 function calcularBanca() {
     const banca = parseFloat(document.getElementById("bancaValor").value);
@@ -140,7 +141,7 @@ function calcularBanca() {
     `;
 }
 
-// PIX (com confetes)
+// ---------- PIX ----------
 const btnPix = document.getElementById("copiarPix");
 if (btnPix) {
     btnPix.addEventListener("click", function () {
@@ -163,17 +164,22 @@ if (btnPix) {
     });
 }
 
-// Scroll Suave + Ano
+// ---------- SCROLL SUAVE ----------
 document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", function (e) {
         e.preventDefault();
         const destino = document.querySelector(this.getAttribute("href"));
-        if (destino) destino.scrollIntoView({ behavior: "smooth" });
+        if (destino) {
+            destino.scrollIntoView({ behavior: "smooth" });
+        }
     });
 });
 
+// ---------- ANO AUTOMÁTICO ----------
 const ano = new Date().getFullYear();
 const footer = document.querySelector("footer p:last-child");
-if (footer) footer.innerHTML = `© ${ano} Todos os direitos reservados.`;
+if (footer) {
+    footer.innerHTML = `© ${ano} Todos os direitos reservados.`;
+}
 
 console.log("Aviator Tools carregado com sucesso.");
